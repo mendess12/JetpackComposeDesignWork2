@@ -17,6 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.yusufmendes.jetpackcomposedesignwork2.ui.theme.JetpackComposeDesignWork2Theme
 
 class MainActivity : ComponentActivity() {
@@ -29,15 +33,32 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    PageTransitions()
                 }
             }
         }
     }
 }
 
+//startDestination ilk açılacak sayfa
 @Composable
-fun MainScreen() {
+fun PageTransitions() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "mainScreen") {
+        composable("mainScreen") {
+            MainScreen(navController = navController)
+        }
+        composable("secondScreen") {
+            SecondScreen(navController = navController)
+        }
+        composable("thirdScreen") {
+            ThirdScreen()
+        }
+    }
+}
+
+@Composable
+fun MainScreen(navController: NavController) {
 
     val number = remember { mutableStateOf(10) }
 
@@ -48,7 +69,9 @@ fun MainScreen() {
     ) {
         Text(text = "Main Screen", fontSize = 52.sp)
 
-        Button(onClick = { }) {
+        Button(onClick = {
+            navController.navigate("secondScreen")
+        }) {
             Text(text = "Go to Second Screen")
         }
 
@@ -64,6 +87,6 @@ fun MainScreen() {
 @Composable
 fun GreetingPreview() {
     JetpackComposeDesignWork2Theme {
-        MainScreen()
+        PageTransitions()
     }
 }

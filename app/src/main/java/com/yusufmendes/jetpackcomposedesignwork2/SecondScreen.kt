@@ -9,9 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun SecondScreen() {
+fun SecondScreen(navController: NavController) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -20,8 +21,16 @@ fun SecondScreen() {
     ) {
         Text(text = "Second Screen", fontSize = 52.sp)
 
-        Button(onClick = { }) {
+        Button(onClick = {
+            navController.navigate("thirdScreen")
+        }) {
             Text(text = "Go to Third Screen")
+        }
+
+        Button(onClick = {
+            navController.popBackStack()
+        }) {
+            Text(text = "Back to Main Screen")
         }
     }
 }
