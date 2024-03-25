@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.yusufmendes.jetpackcomposedesignwork2.ui.theme.JetpackComposeDesignWork2Theme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Screen()
+                    MainScreen()
                 }
             }
         }
@@ -36,15 +37,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Screen() {
+fun MainScreen() {
 
     val number = remember { mutableStateOf(10) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(text = "Main Screen", fontSize = 52.sp)
+
+        Button(onClick = { }) {
+            Text(text = "Go to Second Screen")
+        }
+
         Text(text = "Number : ${number.value}")
 
         Button(onClick = { number.value = number.value + 2 }) {
@@ -57,6 +64,6 @@ fun Screen() {
 @Composable
 fun GreetingPreview() {
     JetpackComposeDesignWork2Theme {
-        Screen()
+        MainScreen()
     }
 }
