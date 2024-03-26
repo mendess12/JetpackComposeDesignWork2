@@ -18,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.yusufmendes.jetpackcomposedesignwork2.ui.theme.JetpackComposeDesignWork2Theme
 
 class MainActivity : ComponentActivity() {
@@ -48,8 +50,20 @@ fun PageTransitions() {
         composable("mainScreen") {
             MainScreen(navController = navController)
         }
-        composable("secondScreen") {
-            SecondScreen(navController = navController)
+        composable(
+            "secondScreen/{name}/{age}/{weight}/{isSingle}",
+            arguments = listOf(
+                navArgument("name") { type = NavType.StringType },
+                navArgument("age") { type = NavType.IntType },
+                navArgument("weight") { type = NavType.FloatType },
+                navArgument("isSingle") { type = NavType.BoolType },
+            )
+        ) {
+            val name = it.arguments?.getString("name")!!
+            val age = it.arguments?.getInt("age")!!
+            val weight = it.arguments?.getFloat("weight")!!
+            val isSingle = it.arguments?.getBoolean("isSingle")!!
+            SecondScreen(navController = navController, name, age, weight, isSingle)
         }
         composable("thirdScreen") {
             ThirdScreen()
@@ -70,7 +84,7 @@ fun MainScreen(navController: NavController) {
         Text(text = "Main Screen", fontSize = 52.sp)
 
         Button(onClick = {
-            navController.navigate("secondScreen")
+            navController.navigate("secondScreen/Yusuf/23/1.78f/true")
         }) {
             Text(text = "Go to Second Screen")
         }

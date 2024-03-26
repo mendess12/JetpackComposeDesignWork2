@@ -12,7 +12,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun SecondScreen(navController: NavController) {
+fun SecondScreen(
+    navController: NavController,
+    getName: String,
+    getAge: Int,
+    getWeight: Float,
+    getIsSingle: Boolean
+) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -20,6 +26,11 @@ fun SecondScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Second Screen", fontSize = 52.sp)
+
+        Text(text = getName, fontSize = 20.sp)
+        Text(text = getAge.toString(), fontSize = 20.sp)
+        Text(text = getWeight.toString(), fontSize = 20.sp)
+        Text(text = getIsSingle.toString(), fontSize = 20.sp)
 
         Button(onClick = {
             navController.navigate("thirdScreen") {
