@@ -69,4 +69,7 @@ dependencies {
 
     //navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    //gson
+    implementation("com.google.code.gson:gson:2.8.6")
 }
