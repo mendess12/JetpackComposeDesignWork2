@@ -22,7 +22,10 @@ fun SecondScreen(navController: NavController) {
         Text(text = "Second Screen", fontSize = 52.sp)
 
         Button(onClick = {
-            navController.navigate("thirdScreen")
+            navController.navigate("thirdScreen") {
+                //back stack'ten silinecek sayfanın etiketi popUpTo içine yazılır.
+                popUpTo("secondScreen") { inclusive = true }
+            }
         }) {
             Text(text = "Go to Third Screen")
         }
