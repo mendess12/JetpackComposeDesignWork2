@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.gson.Gson
 
 @Composable
 fun SecondScreen(
@@ -33,7 +34,9 @@ fun SecondScreen(
         Text(text = getIsSingle.toString(), fontSize = 20.sp)
 
         Button(onClick = {
-            navController.navigate("thirdScreen") {
+            val lesson = Lessons("Software", "Kotlin", 10)
+            val lessonJson = Gson().toJson(lesson)
+            navController.navigate("thirdScreen/$lessonJson") {
                 //back stack'ten silinecek sayfanın etiketi popUpTo içine yazılır.
                 popUpTo("secondScreen") { inclusive = true }
             }

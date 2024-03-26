@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.gson.Gson
 import com.yusufmendes.jetpackcomposedesignwork2.ui.theme.JetpackComposeDesignWork2Theme
 
 class MainActivity : ComponentActivity() {
@@ -65,8 +66,14 @@ fun PageTransitions() {
             val isSingle = it.arguments?.getBoolean("isSingle")!!
             SecondScreen(navController = navController, name, age, weight, isSingle)
         }
-        composable("thirdScreen") {
-            ThirdScreen()
+        composable("thirdScreen/{object}",
+            arguments = listOf(
+                navArgument("object") { type = NavType.StringType }
+            )
+        ) {
+            val json = it.arguments?.getString("object")
+            val lessonObject = Gson().fromJson(json, Lessons::class.java)
+            ThirdScreen(getLessons = lessonObject)
         }
     }
 }

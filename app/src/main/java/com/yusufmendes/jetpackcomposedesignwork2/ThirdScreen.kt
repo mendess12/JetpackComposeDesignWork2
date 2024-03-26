@@ -14,7 +14,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ThirdScreen() {
+fun ThirdScreen(
+    getLessons: Lessons
+) {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -22,6 +24,10 @@ fun ThirdScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Third Screen", fontSize = 52.sp)
+
+        Text(text = getLessons.name, fontSize = 20.sp)
+        Text(text = getLessons.language, fontSize = 20.sp)
+        Text(text = getLessons.time.toString(), fontSize = 20.sp)
     }
 
     //Geri tuşuna basılınca activity'i kapatma işlemi
