@@ -1,6 +1,7 @@
 package com.yusufmendes.jetpackcomposedesignwork2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -100,6 +104,20 @@ fun MainScreen(navController: NavController) {
 
         Button(onClick = { number.value = number.value + 2 }) {
             Text(text = "Click")
+        }
+    }
+
+    LaunchedEffect(key1 = true) {
+        Log.e("Main Screen", "Launch Effect is running")
+    }
+
+    SideEffect {
+        Log.e("Main Screen", "Side Effect is running")
+    }
+    
+    DisposableEffect(Unit){
+        onDispose {
+            Log.e("Main Screen", "Disposable Effect is running")
         }
     }
 }
